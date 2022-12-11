@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int dieNum;
-    
+    #region Singleton
+
+    public static GameManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+    #endregion
+
+    public int dieNum = 0;
+    public int power = 0;
+    public int turnNum = 0;
+    public bool run = false;
+
     public GameObject[] lights;
 
     [SerializeField]
@@ -20,19 +33,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) || run == true)
         {
             StartCoroutine(Activelights());
         }
 
     }
 
-
     private IEnumerator Activelights()
     {
         for (int i = 0; i < lights.Length; i++)
         {
-            if (i < dieNum)
+            if (i < turnNum)
             {
                 lights[i].SetActive(true);
             }
@@ -41,12 +53,38 @@ public class GameManager : MonoBehaviour
                 lights[i].SetActive(false);
             }
 
-            if (dieNum == 4)
+            if (turnNum == 4)
             {
-                dieNum = 7;
+                turnNum = 7;
             }
             yield return new WaitForSeconds(moveTime);
-        }
-        
+        } 
+        run = false;
+    }
+    public void LightsUpdate()
+    {
+        run = true;
+    }
+
+    public void TurnIncrease()
+    {
+        turnNum += dieNum;
+    }
+    public void TurnDecrease()
+    {
+        turnNum -= dieNum;
+    }
+    public int RollDice()
+    {
+        dieNum = Random.Range(1, 7);
+        return dieNum;
+    }
+    public void PowerIncrease()
+    {
+        power += dieNum;
+    }
+    public void PowerDecrease()
+    {
+        power -= dieNum;
     }
 }
