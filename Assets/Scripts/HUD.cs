@@ -20,7 +20,7 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        powerText.text = GameManager.Instance.power.ToString();
     }
 
     public void TurnOnLights()
@@ -51,7 +51,6 @@ public class HUD : MonoBehaviour
     public void Gainpower()
     {
         GameManager.Instance.PowerIncrease();
-        powerText.text = GameManager.Instance.power.ToString();
         gainPowerButton.interactable = false;
         lightsButton.interactable = false;
         rollButton.interactable = true;
