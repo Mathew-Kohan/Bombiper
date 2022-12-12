@@ -8,6 +8,8 @@ public class HUD : MonoBehaviour
     public Text dieText;
     public Text powerText;
     public Button rollButton;
+    public Button lightsButton;
+    public Button gainPowerButton;
 
     // Start is called before the first frame update
     void Start()
@@ -21,10 +23,14 @@ public class HUD : MonoBehaviour
         
     }
 
-    public void TurnOn()
+    public void TurnOnLights()
     {
         GameManager.Instance.TurnIncrease();
         GameManager.Instance.LightsUpdate();
+        lightsButton.interactable = false;
+        gainPowerButton.interactable = false;
+
+        rollButton.interactable = true;
     }
 
     public void RollaDie()
@@ -33,12 +39,18 @@ public class HUD : MonoBehaviour
 
         GameManager.Instance.RollDice();
         dieText.text = GameManager.Instance.RollDice().ToString();
-        rollButton.enabled = false;
+        rollButton.interactable = false;
+        lightsButton.interactable = true;
+        gainPowerButton.interactable = true;
     }
 
     public void Gainpower()
     {
         GameManager.Instance.PowerIncrease();
         powerText.text = GameManager.Instance.power.ToString();
+        gainPowerButton.interactable = false;
+        lightsButton.interactable = false;
+
+        rollButton.interactable = true;
     }
 }
