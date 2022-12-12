@@ -8148,6 +8148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieText: {fileID: 1044441355}
   powerText: {fileID: 202976460}
+  rollButton: {fileID: 0}
 --- !u!1 &865849004
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class HUD : MonoBehaviour
 {
     public Text dieText;
     public Text powerText;
+    public Button rollButton;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class HUD : MonoBehaviour
 
         GameManager.Instance.RollDice();
         dieText.text = GameManager.Instance.RollDice().ToString();
+        rollButton.enabled = false;
     }
 
     public void Gainpower()
