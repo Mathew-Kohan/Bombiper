@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
             if (i < turnNum)
             {
                 lights[i].SetActive(true);
+                yield return new WaitForSeconds(moveTime);
+
             }
             else
             {
@@ -57,10 +59,9 @@ public class GameManager : MonoBehaviour
             {
                 turnNum = 7;
             }
-            yield return new WaitForSeconds(moveTime);
         } 
-        run = false;
     }
+
     public void LightsUpdate()
     {
         run = true;
