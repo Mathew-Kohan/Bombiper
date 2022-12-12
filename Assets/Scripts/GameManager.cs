@@ -60,10 +60,26 @@ public class GameManager : MonoBehaviour
 
             foreach (var item in nodes.nodesArray)
             {
-                if(turnNum == item.num1)
+                if(item.num1 < item.num2)
                 {
-                    turnNum = item.num2;
+                    if (turnNum == item.num1 && power >= 2)
+                    {
+                        PowerDecrease(2);
+                        turnNum = item.num2;
+                    }
                 }
+                else if (item.num1 > item.num2)
+                {
+                    if (turnNum == item.num1 && power >= 4)
+                    {
+                        PowerDecrease(4);
+                    }
+                    else
+                    {
+                        turnNum = item.num2;
+                    }
+                }
+
             }
         } 
     }
@@ -92,8 +108,8 @@ public class GameManager : MonoBehaviour
         powerTurn += 13;
 
     }
-    public void PowerDecrease()
+    public void PowerDecrease(int a)
     {
-        power -= dieNum;
+        power -= a;
     }
 }
