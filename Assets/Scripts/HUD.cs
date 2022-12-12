@@ -41,7 +41,11 @@ public class HUD : MonoBehaviour
         dieText.text = GameManager.Instance.RollDice().ToString();
         rollButton.interactable = false;
         lightsButton.interactable = true;
-        gainPowerButton.interactable = true;
+
+        if (GameManager.Instance.powerTurn <= GameManager.Instance.turnNum)
+        {
+            gainPowerButton.interactable = true;
+        }
     }
 
     public void Gainpower()
@@ -50,7 +54,6 @@ public class HUD : MonoBehaviour
         powerText.text = GameManager.Instance.power.ToString();
         gainPowerButton.interactable = false;
         lightsButton.interactable = false;
-
         rollButton.interactable = true;
     }
 }

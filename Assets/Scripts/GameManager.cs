@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int dieNum = 0;
     public int power = 0;
     public int turnNum = 0;
+    public int powerTurn = 0;
     public bool run = false;
 
     public GameObject[] lights;
@@ -24,10 +25,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float moveTime;
 
+    public Nodes nodes;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        nodes = this.gameObject.GetComponent<Nodes>();
     }
 
     // Update is called once per frame
@@ -55,9 +58,12 @@ public class GameManager : MonoBehaviour
                 lights[i].SetActive(false);
             }
 
-            if (turnNum == 4)
+            foreach (var item in nodes.nodesArray)
             {
-                turnNum = 7;
+                if(turnNum == item.num1)
+                {
+                    turnNum = item.num2;
+                }
             }
         } 
     }
@@ -83,6 +89,8 @@ public class GameManager : MonoBehaviour
     public void PowerIncrease()
     {
         power += dieNum;
+        powerTurn += 13;
+
     }
     public void PowerDecrease()
     {
